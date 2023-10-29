@@ -24,7 +24,7 @@ public class LRU
 			{ 
 				if (!s.contains(pages[i])) 
 				{ 
-					int lru = Integer.MAX_VALUE, val=Integer.MIN_VALUE; 
+					int lru = Integer.MAX_VALUE, val = Integer.MIN_VALUE; 
 					
 					Iterator<Integer> itr = s.iterator(); 
 					
@@ -47,6 +47,7 @@ public class LRU
 			} 
 		} 
 	
+		System.out.println(indexes);
 		return page_faults; 
 	} 
 	

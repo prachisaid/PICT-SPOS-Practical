@@ -8,13 +8,13 @@ class OptimalPage {
 		return false;
 	}
 
-	static int predict(int pg[], int[] fr, int pn, int index)
+	static int predict(int pages[], int[] set, int n, int index)
 	{
 		int res = -1, farthest = index;
-		for (int i = 0; i < fr.length; i++) {
+		for (int i = 0; i < set.length; i++) {
 			int j;
-			for (j = index; j < pn; j++) {
-				if (fr[i] == pg[j]) {
+			for (j = index; j < n; j++) {
+				if (set[i] == pages[j]) {
 					if (j > farthest) {
 						farthest = j;
 						res = i;
@@ -23,35 +23,35 @@ class OptimalPage {
 				}
 			}
 
-			if (j == pn)
+			if (j == n)
 				return i;
 		}
 
 		return (res == -1) ? 0 : res;
 	}
 
-	static void optimalPage(int pg[], int pn, int fn){
-		int[] fr = new int[fn];
+	static void optimalPage(int pages[], int n, int capacity){
+		int[] set = new int[capacity];
 
 		int hit = 0;
 		int index = 0;
-		for (int i = 0; i < pn; i++) {
+		for (int i = 0; i < n; i++) {
 
-			if (search(pg[i], fr)) {
+			if (search(pages[i], set)) {
 				hit++;
 				continue;
 			}
 
-			if (index < fn)
-				fr[index++] = pg[i];
+			if (index < capacity)
+				set[index++] = pages[i];
 
 			else {
-				int j = predict(pg, fr, pn, i + 1);
-				fr[j] = pg[i];
+				int j = predict(pages, set, n, i + 1);
+				set[j] = pages[i];
 			}
 		}
 		System.out.println("No. of hits = " + hit);
-		System.out.println("No. of misses = " + (pn - hit));
+		System.out.println("No. of misses = " + (n - hit));
 	}
 
 	public static void main(String[] args){
